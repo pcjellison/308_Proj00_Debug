@@ -16,8 +16,8 @@ namespace Jellison_Payton_Debug
         public Card()
         {
             Value = -1;
-            Suit = "";
-            Rank = "";
+            Suit = " ";
+            Rank = " ";
             Number = -1;
         }
     }

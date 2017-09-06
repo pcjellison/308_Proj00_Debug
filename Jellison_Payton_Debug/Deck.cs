@@ -8,7 +8,7 @@ namespace Jellison_Payton_Debug
 {
     class Deck
     {
-        List<Card> deckList = new List<Card>();
+        List<Card> deck = new List<Card>();
         public Deck()   //create deck
         {
 
@@ -16,7 +16,7 @@ namespace Jellison_Payton_Debug
 
         public void createDeck()
         {
-            deckList.Clear();
+            deck.Clear();
             int num = 1;
             while (num < 53)
             {
@@ -79,7 +79,7 @@ namespace Jellison_Payton_Debug
                             c.Rank = "K";
                             num++;
                         }
-                        deckList.Add(c);    //Adds card to the deck
+                        deck.Add(c);    //Adds card to the deck
                     }
                 }
             }
@@ -88,18 +88,15 @@ namespace Jellison_Payton_Debug
 
         public Card Deal(char rank, char suit)
         {
-            foreach(Card c in deckList)
+            int count = 0;
+            foreach(Card c in deck)
             {
-                if(c.Rank == rank.ToString())
+                if(rank.ToString() == c.Rank && suit.ToString() == c.Suit)
                 {
-                    foreach(Card d in deckList)
-                    {
-                        if(d.Suit == suit.ToString())
-                        {
-                            return d;
-                        }
-                    }
+                     deck.Remove(c);
+                     return c;
                 }
+                count++;
             }
             Console.WriteLine("Card not Found");
             return null;
@@ -107,11 +104,11 @@ namespace Jellison_Payton_Debug
 
         public Card RandomDeal(int num)
         {
-            foreach (Card c in deckList)
+            foreach (Card c in deck)
             {
                 if (c.Number == num)
                 {
-                    deckList.Remove(c);
+                    deck.Remove(c);
                     return c;
                 }
             }
