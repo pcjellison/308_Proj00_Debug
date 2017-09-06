@@ -49,7 +49,8 @@ namespace Jellison_Payton_Debug
                     Console.WriteLine("You have no funds left.");
                     uxQuit();
                 }
-
+                playerHand.Clear();
+                dealerHand.Clear();
 
                 Console.WriteLine("===== NEW GAME =====");
                 Console.WriteLine(" You have: $" + pot);
@@ -149,14 +150,16 @@ namespace Jellison_Payton_Debug
                     uxGameOver();
                 }
                 Console.WriteLine("Do you want to surrender <Y or N>?: ");
-                playerHandValue = 0;
                 surr = Console.ReadLine();
                 if (surr == "y" || surr == "Y")
                 {
-                    uxQuit();
+                    pot -= (bet / 2);
+                    playerHandValue = 0;
+                    uxContinue();
                 }
-                else
+                else if (surr == "N" || surr == "n")
                 {
+                    playerHandValue = 0;
                     Console.Write("Will you HIT or STAND <H or S>? : ");
                     string ans = Console.ReadLine();
 
@@ -164,10 +167,21 @@ namespace Jellison_Payton_Debug
                     {
                         uxPlayerHit();
                     }
-                    else
+                    else if (ans == "S" || ans == "s")
                     {
                         uxPlayerStand();
                     }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input");
+                        uxPlayerHandDisplay();
+                    }
+                }
+                else
+                {
+                    playerHandValue = 0;
+                    Console.WriteLine("Invalid Input.");
+                    uxPlayerHandDisplay();
                 }
             }
 
